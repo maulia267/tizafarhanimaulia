@@ -1,70 +1,45 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const registerForm = document.getElementById("registerForm");
-  if (registerForm) {
-    registerForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const fullname = document.getElementById("fullname").value;
-      const nickname = document.getElementById("nickname").value;
-      const birthplace = document.getElementById("birthplace").value;
-      const birthdate = document.getElementById("birthdate").value;
-      const domicile = document.getElementById("domicile").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-      const user = {
-        fullname,
-        nickname,
-        birthplace,
-        birthdate,
-        domicile,
-        email,
-        password,
-      };
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-      localStorage.setItem(email, JSON.stringify(user));
-      alert("Registration successful! You can now log in.");
-      window.location.href = "login.html";
-    });
-  }
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+            // Contoh validasi sederhana
+            if (email === '' || password === '') {
+                alert('Email dan password harus diisi.');
+            } else {
+                alert('Login berhasil!');
+                // Lakukan pengalihan ke halaman profil
+                window.location.href = 'ProfilTizaFarhaniMaulia.html';
+            }
+        });
+    }
 
-      const user = JSON.parse(localStorage.getItem(email));
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-      if (user && user.password === password) {
-        sessionStorage.setItem("loggedInUser", email);
-        alert("Login successful!");
-        window.location.href = "ProfilTizaFarhaniMaulia.html";
-      } else {
-        alert("Invalid email or password.");
-      }
-    });
-  }
+            const fullname = document.getElementById('fullname').value;
+            const nickname = document.getElementById('nickname').value;
+            const birthplace = document.getElementById('birthplace').value;
+            const birthdate = document.getElementById('birthdate').value;
+            const domicile = document.getElementById('domicile').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-  const logoutButton = document.getElementById("logoutButton");
-  const loginLink = document.getElementById("loginLink");
-  const profileSection = document.getElementById("profileSection");
-  const universitySection = document.getElementById("universitySection");
-
-  if (sessionStorage.getItem("loggedInUser")) {
-    if (logoutButton) logoutButton.style.display = "block";
-    if (loginLink) loginLink.style.display = "none";
-    if (profileSection) profileSection.style.display = "block";
-    if (universitySection) universitySection.style.display = "block";
-  } else {
-    window.location.href = "login.html";
-  }
-
-  if (logoutButton) {
-    logoutButton.addEventListener("click", () => {
-      sessionStorage.removeItem("loggedInUser");
-      alert("You have logged out.");
-      window.location.href = "login.html";
-    });
-  }
+            // Contoh validasi sederhana
+            if (fullname === '' || nickname === '' || birthplace === '' || birthdate === '' || domicile === '' || email === '' || password === '') {
+                alert('Semua kolom harus diisi.');
+            } else {
+                alert('Registrasi berhasil!');
+                // Lakukan pengalihan ke halaman login
+                window.location.href = 'login.html';
+            }
+        });
+    }
 });
